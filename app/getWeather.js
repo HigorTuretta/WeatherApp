@@ -11,6 +11,15 @@ const moistureTax = document.getElementById("moisture-tax");
 const visibilityTax = document.getElementById("visibility-tax");
 const cityInput = document.querySelector(".city-input");
 
+const airQuality = document.getElementById("air-quality");
+const airQualityMetric = document.getElementById("air-quality-metric");
+const airPm25 = document.getElementById("pm25-value");
+const airPm10 = document.getElementById("pm10-value");
+const airSo = document.getElementById("so-value");
+const airNo = document.getElementById("no-value");
+const airO2 = document.getElementById("o2-value");
+const airCo = document.getElementById("co-value");
+
 //chama as funções apos a conclusão do corregamento da DOM
 document.addEventListener("DOMContentLoaded", function () {
   inputCitySizeAdjust();
@@ -24,7 +33,14 @@ const getWeatherData = async (city) => {
 
   const res = await fetch(apiweatherURL);
   const data = await res.json();
-  console.log(data);
+  return data;
+};
+
+const getAirData = async (lat, lon) => {
+  const apiAirURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const res = await fetch(apiAirURL);
+  const data = await res.json();
+
   return data;
 };
 
@@ -35,6 +51,8 @@ const showWeatherData = async (city) => {
   if (!Number.isInteger(visibility)) {
     visibility = visibility.toFixed(2);
   }
+  const lat = data.coord.lat;
+  const lon = data.coord.lon;
 
   cityTemp.innerHTML = parseInt(data.main.temp);
   weatherDescription.innerHTML = data.weather[0].description;
@@ -44,6 +62,8 @@ const showWeatherData = async (city) => {
   windTax.innerHTML = `${data.wind.speed}<span> km/h</span>`;
   moistureTax.innerHTML = `${data.main.humidity}<span> %</span>`;
   visibilityTax.innerHTML = `${visibility}<span> km</span>`;
+
+  showAirData(lat, lon);
 };
 //eventos
 cityInput.addEventListener("keydown", (event) => {
@@ -53,10 +73,40 @@ cityInput.addEventListener("keydown", (event) => {
   }
 });
 
-cityInput.addEventListener("blur", () => {
-  let city = cityInput.value;
-  showWeatherData(city);
-});
+const showAirData = async (lat, lon) => {
+  const data = await getAirData(lat, lon);
+  const airMetric = data.list[0].main.aqi;
+  let metricText;
+  switch (airMetric) {
+    case 1:
+      metricText = "Boa";
+      break;
+    case 2:
+      metricText = "Razoável";
+      break;
+    case 3:
+      metricText = "Moderada";
+      break;
+    case 4:
+      metricText = "Ruim";
+      break;
+    case 5:
+      metricText = "Muito Ruim";
+      break;
+    default:
+      metricText = "Indisponível";
+      break;
+  }
+
+  airQuality.innerHTML = metricText;
+  airQualityMetric.innerHTML = airMetric;
+  airPm25.innerHTML = data.list[0].components.pm2_5;
+  airPm10.innerHTML = data.list[0].components.pm10;
+  airO2.innerHTML = data.list[0].components.o3;
+  airNo.innerHTML = data.list[0].components.no2;
+  airCo.innerHTML = data.list[0].components.co;
+  airSo.innerHTML = data.list[0].components.so2;
+};
 
 //Atualiza o tamanho do input do nome da cidade dinamicamente
 function inputCitySizeAdjust() {

@@ -40,3 +40,12 @@
 .dow-temp span:last-child{
   color: #C2BFF4;
 }
+
+@media screen and (max-width: 1080px) {
+
+.day-of-week{
+  justify-content: space-around;
+  margin: 0 15px;
+}
+  
+}
