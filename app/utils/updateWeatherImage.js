@@ -33,7 +33,6 @@ switch (wheaterDescription){
         break
 }
 
-
-container.src = `../../assets/images/svg/${wheater}.svg`;
+container.src = `./images/svg/${wheater}.svg`;
 container.setAttribute('alt', wheater);
 }
