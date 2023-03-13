@@ -1,0 +1,58 @@
+/* Importação da fonte Roboto do Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap");
+
+/* Define o reset de margin e padding para todos os elementos */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Define estilos para o corpo da página */
+body {
+  overflow-x: hidden;
+}
+
+/* Define estilos para a div principal que será utilizada como fundo */
+.main-background {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url("../images/backgrounds/Background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Define estilos para o bloco principal */
+.block {
+  padding: 20px; /* Adicionando um padding à borda do bloco */
+}
+
+/* Define estilos para o grid principal */
+.container-main {
+  display: grid;
+  grid-template-areas:
+    "weather-block air-block sun-block"
+    "weather-block week-block week-block";
+  grid-gap: 15px; /* Adicionando espaço entre as células do grid */
+  padding: 20px;
+}
+
+.hide{
+  display: none;
+}
+
+@media screen and (max-width: 1080px) {
+  .container-main {
+    grid-template-areas:
+      "weather-block" "weather-block"
+      "air-block" "sun-block"
+      "week-block" "week-block";
+  }
+  .main-background{
+    padding-top: 75px;
+  }
+}

@@ -1,0 +1,159 @@
+/* Estilização da área principal */
+.temp-area {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Define estilos para o bloco de clima */
+.weather-block {
+  background-color: rgb(122, 96, 146);
+  border-radius: 10px;
+  grid-area: weather-block; /* Associando a célula ao nome da área */
+  background-image: linear-gradient(
+      to bottom,
+      rgba(75, 7, 69, 0.833),
+      rgba(79, 5, 97, 0.126)
+    ),
+    url("../images/backgrounds/cloudsBg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: safe;
+  gap: 24px;
+}
+
+/* Estilização da imagem da temperatura */
+.temp-area #svg-container{
+  position: absolute;
+  top: -6rem;
+  left: -5rem;
+  width: 176px;
+  height: 176px;
+}
+
+/* Estilização do local da temperatura */
+.locale {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: end
+}
+
+.city-input{
+  background-color:transparent;
+  border: none; 
+  color: rgb(165, 165, 165);
+  width: 40%;
+  transition: all 0.1s ease-in-out;
+  text-align: end;
+}
+
+.city-input:focus{
+  outline: none;
+  border-bottom: 1px solid #dad8f7;
+}
+
+.city-input:hover{
+  cursor: pointer;
+}
+
+/* Estilização do texto da temperatura */
+.temperature {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.temp-text {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-left: 1.5rem;
+  color: white;
+}
+
+.temp-format {
+  font-size: 1rem;
+  margin: 0.7rem 0.5rem;
+  color: rgb(237, 237, 237);
+}
+
+.weather-text{
+  color: #dad8f7;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 0 0 10px 0;
+  text-transform: capitalize;
+}
+
+/* Estilização da temperatura mínima e máxima */
+.temp-min-max {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10rem;
+  color: white;
+}
+
+/* Estilização dos blocos de temperatura mínima e máxima */
+.temp-blocks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.temp-min-max p:nth-of-type(2) {
+  color: rgb(157, 157, 157) !important;
+}
+/* Estilização das imagens dos blocos de estatísticas */
+.statistics-block svg{
+    width: 32px;
+    height: 32px;
+    filter: grayscale(100%)!important;
+    margin-right: 10px;
+}
+/* Estilização dos blocos de estatísticas */
+.statistics-block {
+  display: flex;
+  flex-wrap: nowrap; /* Mantém todos os elementos em uma única linha */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(87, 37, 161, 0.449);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Estilização dos blocos de vento, umidade e chuva */
+.wind-block,
+.moisture-block,
+.visibility-block {
+  flex-grow: 1; /* Cada elemento ocupa a mesma quantidade de espaço disponível */
+  min-width: 0; /* Evita que os elementos sejam restringidos em largura */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.wind-block span,
+.moisture-block span,
+.visibility-block span {
+  font-size: 0.7rem;
+  font-family: "Roboto", sans-serif;
+  color: rgb(203, 203, 203);
+}
+
+.wind-block p,
+.moisture-block p,
+.visibility-block p {
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}

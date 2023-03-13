@@ -1,0 +1,73 @@
+/* Define estilos para o bloco de qualidade do ar */
+
+.air-block {
+  background-color: #6d67d0;
+  border-radius: 10px;
+  grid-area: air-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Lato", sans-serif;
+}
+
+.air-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.air-title svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.air-title p {
+  font-size: 0.9rem;
+  color: #dad8f7;
+  font-weight: 550;
+  letter-spacing: 1px;
+}
+
+.air-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.air-status span {
+  font-size: 1.2rem;
+  color: #87ebcd;
+}
+
+.air-status h1 {
+  color: #e7e6fb;
+  font-size: 2.4rem;
+}
+
+.air-statistics {
+  display: flex;
+  flex-basis: 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.air-statistics-text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.air-statistics span:nth-child(1) {
+  color: #87ebcd;
+  font-size: 14px;
+  font-weight: 600;
+}
+.air-statistics span:nth-child(2) {
+  color: #e7e6fb;
+  font-size: 12px;
+  font-weight: lighter;
+}

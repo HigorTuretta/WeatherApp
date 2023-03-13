@@ -1,0 +1,31 @@
+/* Define estilos para o bloco de informações sobre o sol */
+.sun-block {
+  background-color: #6d67d0;
+  border-radius: 10px;
+  grid-area: sun-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Lato", sans-serif;
+}
+
+.sun-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sun-title svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.sun-title p {
+  font-size: 0.9rem;
+  color: #dad8f7;
+  font-weight: 550;
+  letter-spacing: 1px;
+}

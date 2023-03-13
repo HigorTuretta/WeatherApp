@@ -1,0 +1,42 @@
+/* Define estilos para o bloco de informações da semana */
+.week-block {
+  background-color: rgb(43, 168, 226);
+  grid-area: week-block;
+  background-color: #6d67d0;
+  border-radius: 10px;
+  background-color: #6d67d0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: safe;
+  font-family: "Lato", sans-serif;
+}
+
+.day-of-week{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dow-title{
+  font-size: 14px;
+  font-weight: bold;
+  color: #DAD8F7;
+  letter-spacing: 0.5px;
+}
+.dow-svg svg{
+  height: 64px;
+  width: 64px;
+}
+.dow-temp{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.dow-temp span:first-child{
+  color: #DAD8F7;
+}
+.dow-temp span:last-child{
+  color: #C2BFF4;
+}
