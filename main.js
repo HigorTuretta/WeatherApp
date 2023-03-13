@@ -1,4 +1,4 @@
-import { updateSVG } from "./app/utils/updateweatherImage";
+import { updateSVG } from "./app/utils/updateweatherImage.js";
 
 //Variaveis e seleção de objetos
 const apiKey = "22e966f689b50d30020f27ef9d990ccd";
