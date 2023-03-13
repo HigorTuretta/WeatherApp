@@ -1,4 +1,4 @@
-export default function updateSVG(wheaterDescription, place){
+export function updateSVG(wheaterDescription, place){
 
 const container = document.getElementById(place);
 let wheater
