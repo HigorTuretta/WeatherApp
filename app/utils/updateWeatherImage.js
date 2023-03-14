@@ -10,20 +10,9 @@ export function updateImage(weatherdesc, place) {
 
 
 export function updateBackgroundImage(weatherdesc){
-  const backgroundArea = document.querySelector('.weather-block')
-  let weather = getWeatherDescription(weatherdesc)
-
-  console.log(weather)
-  
-  let url = `/images/backgrounds/bg_${weather}.png`
-  backgroundArea.style.backgroundImage = `linear-gradient(
-    to bottom,
-    rgba(75, 7, 69, 0.500),
-    rgba(79, 5, 97, 0.126)
-  ),
-  url("/images/backgrounds/bg_${weather}.png");`
-
-    console.log(url)
+  const backgroundArea = document.querySelector('.weather-block');
+  let weather = getWeatherDescription(weatherdesc);
+  backgroundArea.style.setProperty('--weather-background', `url("/images/backgrounds/bg_${weather}.png")`);
 
 }
 
