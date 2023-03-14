@@ -1,4 +1,5 @@
-import { updateSVG } from "./app/utils/updateWeatherImage.js";
+import { updateImage, updateBackgroundImage } from "./app/utils/updateWeatherImage.js";
+import moment from "moment-timezone";
 
 //Variaveis e seleção de objetos
 const apiKey = "22e966f689b50d30020f27ef9d990ccd";
@@ -20,10 +21,14 @@ const airNo = document.getElementById("no-value");
 const airO2 = document.getElementById("o2-value");
 const airCo = document.getElementById("co-value");
 
+const sunRise = document.querySelector('.sunrise-time')
+const sunSet = document.querySelector('.sunset-time')
+
+const pinLocation = document.querySelector('.locale > svg')
+
 //chama as funções apos a conclusão do corregamento da DOM
 document.addEventListener("DOMContentLoaded", function () {
   inputCitySizeAdjust();
-  cityInput.value = "Muriaé, MG";
   showWeatherData("Muriaé");
 });
 
@@ -53,15 +58,21 @@ const showWeatherData = async (city) => {
   }
   const lat = data.coord.lat;
   const lon = data.coord.lon;
+  const sunRiseTime = moment.utc(data.sys.sunrise,'X').add(data.timezone,'seconds').format('HH:mm a');
+  const sunSetTime = moment.utc(data.sys.sunset,'X').add(data.timezone,'seconds').format('HH:mm a');
 
   cityTemp.innerHTML = parseInt(data.main.temp);
   weatherDescription.innerHTML = data.weather[0].description;
-  tempMin.innerHTML = parseInt(data.main.temp_min);
-  tempMax.innerHTML = parseInt(data.main.temp_max);
-  updateSVG(data.weather[0].icon, "svg-container");
+  tempMin.innerHTML = `${parseInt(data.main.temp_min)}º`
+  tempMax.innerHTML = `${parseInt(data.main.temp_max)}º`;
+  updateImage(data.weather[0].icon, "weather-img");
+  updateBackgroundImage(data.weather[0].icon)
   windTax.innerHTML = `${data.wind.speed}<span> km/h</span>`;
   moistureTax.innerHTML = `${data.main.humidity}<span> %</span>`;
   visibilityTax.innerHTML = `${visibility}<span> km</span>`;
+
+  sunRise.innerHTML = sunRiseTime
+  sunSet.innerHTML = sunSetTime
 
   showAirData(lat, lon);
 };
@@ -73,32 +84,52 @@ cityInput.addEventListener("keydown", (event) => {
   }
 });
 
+cityInput.addEventListener("blur", (event) => {  
+    if (cityInput.value == '' || cityInput.value == null){
+      cityInput.style.width = '0%'
+    }  
+});
+
+pinLocation.addEventListener('click', (event) =>{
+  cityInput.value= ''
+  cityInput.focus()
+  cityInput.style.width = '55%'
+})
+
 const showAirData = async (lat, lon) => {
   const data = await getAirData(lat, lon);
   const airMetric = data.list[0].main.aqi;
   let metricText;
+  let colorText;
   switch (airMetric) {
     case 1:
       metricText = "Boa";
+      colorText = "#87ebcd";
       break;
     case 2:
       metricText = "Razoável";
+      colorText = "#93eb87";
       break;
     case 3:
       metricText = "Moderada";
+      colorText = "#ebe987";
       break;
     case 4:
       metricText = "Ruim";
+      colorText = "#ebb487";
       break;
     case 5:
       metricText = "Muito Ruim";
+      colorText = "#eb8787";
       break;
     default:
       metricText = "Indisponível";
+      colorText = "#d61b1b";
       break;
   }
 
   airQuality.innerHTML = metricText;
+  airQuality.style.color = colorText;
   airQualityMetric.innerHTML = airMetric;
   airPm25.innerHTML = data.list[0].components.pm2_5;
   airPm10.innerHTML = data.list[0].components.pm10;

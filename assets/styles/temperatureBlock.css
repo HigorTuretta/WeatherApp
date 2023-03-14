@@ -8,13 +8,7 @@
 .weather-block {
   background-color: rgb(122, 96, 146);
   border-radius: 10px;
-  grid-area: weather-block; /* Associando a célula ao nome da área */
-  background-image: linear-gradient(
-      to bottom,
-      rgba(75, 7, 69, 0.833),
-      rgba(79, 5, 97, 0.126)
-    ),
-    url("../../public/images/backgrounds/cloudsBg.jpg");
+  grid-area: weather-block; /* Associando a célula ao nome da área */ 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,12 +20,12 @@
 }
 
 /* Estilização da imagem da temperatura */
-.temp-area #svg-container{
+.temp-area #weather-img{
   position: absolute;
-  top: -6rem;
-  left: -5rem;
-  width: 176px;
-  height: 176px;
+  top: -3rem;
+  left: -4rem;
+  width: 120px;
+  height: 120px;
 }
 
 /* Estilização do local da temperatura */
@@ -42,16 +36,27 @@
   font-size: 0.8rem;
   display: flex;
   align-items: center;
-  justify-content: end
+  justify-content: end;
+}
+
+.locale > svg {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.locale > svg:hover{
+  cursor: pointer;
+  transform: scale(1.3);
 }
 
 .city-input{
   background-color:transparent;
   border: none; 
   color: rgb(165, 165, 165);
-  width: 40%;
   transition: all 0.1s ease-in-out;
   text-align: end;
+  width: 0;
 }
 
 .city-input:focus{

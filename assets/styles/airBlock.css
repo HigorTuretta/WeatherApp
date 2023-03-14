@@ -32,6 +32,38 @@
   letter-spacing: 1px;
 }
 
+#air-quality-metric:hover{
+  cursor: pointer;
+}
+
+#air-quality-metric {
+  position: relative;
+}
+
+#air-quality-metric::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 0;
+  left: 650%;
+  width: 200px;
+  transform: translateX(-50%);
+  padding: 10px 10px;
+  background-color: #8f8f8f7b;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0;
+  visibility: hidden;
+  text-align: center;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#air-quality-metric:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
 .air-status {
   display: flex;
   justify-content: center;
@@ -40,7 +72,6 @@
 }
 .air-status span {
   font-size: 1.2rem;
-  color: #87ebcd;
 }
 
 .air-status h1 {
