@@ -1,4 +1,8 @@
-import { updateImage, updateBackgroundImage } from "./app/utils/updateWeatherImage.js";
+import {
+  updateImage,
+  updateBackgroundImage,
+  getImageScr,
+} from "./app/utils/updateWeatherImage.js";
 import moment from "moment-timezone";
 
 //Variaveis e seleção de objetos
@@ -21,10 +25,10 @@ const airNo = document.getElementById("no-value");
 const airO2 = document.getElementById("o2-value");
 const airCo = document.getElementById("co-value");
 
-const sunRise = document.querySelector('.sunrise-time')
-const sunSet = document.querySelector('.sunset-time')
+const sunRise = document.querySelector(".sunrise-time");
+const sunSet = document.querySelector(".sunset-time");
 
-const pinLocation = document.querySelector('.locale > svg')
+const pinLocation = document.querySelector(".locale > svg");
 
 //chama as funções apos a conclusão do corregamento da DOM
 document.addEventListener("DOMContentLoaded", function () {
@@ -34,18 +38,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Funções
 const getWeatherData = async (city) => {
-  const apiweatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`;
+  const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`;
 
-  const res = await fetch(apiweatherURL);
+  const res = await fetch(apiURL);
   const data = await res.json();
   return data;
 };
 
 const getAirData = async (lat, lon) => {
-  const apiAirURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-  const res = await fetch(apiAirURL);
+  const apiURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const res = await fetch(apiURL);
   const data = await res.json();
 
+  return data;
+};
+
+const getForecastData = async (lat, lon) => {
+  const apiURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${apiKey}`;
+  const res = await fetch(apiURL);
+  const data = await res.json();
   return data;
 };
 
@@ -58,23 +69,30 @@ const showWeatherData = async (city) => {
   }
   const lat = data.coord.lat;
   const lon = data.coord.lon;
-  const sunRiseTime = moment.utc(data.sys.sunrise,'X').add(data.timezone,'seconds').format('HH:mm a');
-  const sunSetTime = moment.utc(data.sys.sunset,'X').add(data.timezone,'seconds').format('HH:mm a');
+  const sunRiseTime = moment
+    .utc(data.sys.sunrise, "X")
+    .add(data.timezone, "seconds")
+    .format("HH:mm a");
+  const sunSetTime = moment
+    .utc(data.sys.sunset, "X")
+    .add(data.timezone, "seconds")
+    .format("HH:mm a");
 
   cityTemp.innerHTML = parseInt(data.main.temp);
   weatherDescription.innerHTML = data.weather[0].description;
-  tempMin.innerHTML = `${parseInt(data.main.temp_min)}º`
+  tempMin.innerHTML = `${parseInt(data.main.temp_min)}º`;
   tempMax.innerHTML = `${parseInt(data.main.temp_max)}º`;
   updateImage(data.weather[0].icon, "weather-img");
-  updateBackgroundImage(data.weather[0].icon)
+  updateBackgroundImage(data.weather[0].icon);
   windTax.innerHTML = `${data.wind.speed}<span> km/h</span>`;
   moistureTax.innerHTML = `${data.main.humidity}<span> %</span>`;
   visibilityTax.innerHTML = `${visibility}<span> km</span>`;
 
-  sunRise.innerHTML = sunRiseTime
-  sunSet.innerHTML = sunSetTime
+  sunRise.innerHTML = sunRiseTime;
+  sunSet.innerHTML = sunSetTime;
 
   showAirData(lat, lon);
+  showForecastData(lat, lon);
 };
 //eventos
 cityInput.addEventListener("keydown", (event) => {
@@ -84,17 +102,17 @@ cityInput.addEventListener("keydown", (event) => {
   }
 });
 
-cityInput.addEventListener("blur", (event) => {  
-    if (cityInput.value == '' || cityInput.value == null){
-      cityInput.style.width = '0%'
-    }  
+cityInput.addEventListener("blur", (event) => {
+  if (cityInput.value == "" || cityInput.value == null) {
+    cityInput.style.width = "0%";
+  }
 });
 
-pinLocation.addEventListener('click', (event) =>{
-  cityInput.value= ''
-  cityInput.focus()
-  cityInput.style.width = '55%'
-})
+pinLocation.addEventListener("click", (event) => {
+  cityInput.value = "";
+  cityInput.focus();
+  cityInput.style.width = "55%";
+});
 
 const showAirData = async (lat, lon) => {
   const data = await getAirData(lat, lon);
@@ -137,6 +155,68 @@ const showAirData = async (lat, lon) => {
   airNo.innerHTML = data.list[0].components.no2;
   airCo.innerHTML = data.list[0].components.co;
   airSo.innerHTML = data.list[0].components.so2;
+};
+
+const showForecastData = async (lat, lon) => {
+  const data = await getForecastData(lat, lon);
+  const weekArea = document.querySelector('.week-block')
+
+  weekArea.innerHTML = '';
+
+  const forecast = {};
+  const today = new Date().getDay();
+  const weekDays = [
+    "Domingo",
+    "Segunda-Feira",
+    "Terça-Feira",
+    "Quarta-Feira",
+    "Quinta-Feira",
+    "Sexta-Feira",
+    "Sábado",
+  ];
+
+  data.list.forEach((item) => {
+    const date = new Date(item.dt_txt);
+    const diaSemana = weekDays[date.getDay()];
+
+    if (!forecast[diaSemana] && date.getDay() !== today) {
+      forecast[diaSemana] = {
+        descricao: item.weather[0].description,
+        icon: item.weather[0].icon,
+        tempMin: item.main.temp_min,
+        tempMax: item.main.temp_max,
+      };
+    }
+  });
+
+  const sortedForecast = {};
+  let dayIndex = today + 1;
+  for (let i = 0; i < 5; i++) {
+    if (dayIndex === 7) {
+      dayIndex = 0;
+    }
+    const diaSemana = weekDays[dayIndex];
+    sortedForecast[diaSemana === weekDays[today + 1] ? "Amanhã" : diaSemana] =
+      forecast[diaSemana];
+    dayIndex++;
+  }
+
+  for (const day in sortedForecast) {
+    let dayHTML = ` <div class="day-of-week">
+                      <div class="dow-title">${day}</div>
+                      <div class="dow-img">
+                        <img id="weather-img-tomorrow" src="${getImageScr(sortedForecast[day].icon)}" alt="">
+                        <span class="tooltip-text">${sortedForecast[day].descricao}</span>
+                      </div>
+                      <div class="dow-temp">
+                        <span id="day1-tempMax" >${parseInt(sortedForecast[day].tempMax)}</span>
+                        <span id="day1-tempMin">${parseInt(sortedForecast[day].tempMin)}</span>
+                      </div>
+                    </div>`
+    
+    weekArea.innerHTML += dayHTML;
+}
+
 };
 
 //Atualiza o tamanho do input do nome da cidade dinamicamente

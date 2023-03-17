@@ -7,6 +7,12 @@ export function updateImage(weatherdesc, place) {
   container.setAttribute("alt", weather);
 }
 
+export function getImageScr(weatherdesc){
+  let weather = getWeatherDescription(weatherdesc)
+
+  return `/images/weatherImages/${weather}.png`  
+}
+
 
 
 export function updateBackgroundImage(weatherdesc){
