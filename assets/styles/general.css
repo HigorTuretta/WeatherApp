@@ -16,7 +16,7 @@ body {
 /* Define estilos para a div principal que será utilizada como fundo */
 .main-background {
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: auto;
   background-image: url("/images/backgrounds/Background.jpg");
   background-position: center;
   background-repeat: no-repeat;
