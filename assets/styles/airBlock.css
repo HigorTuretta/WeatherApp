@@ -1,7 +1,16 @@
 /* Define estilos para o bloco de qualidade do ar */
 
 .air-block {
-  background-color: #6d67d0;
+  background: rgba(42, 16, 75, 0.407);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(42, 16, 75, 0.407);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
   grid-area: air-block;
   display: flex;
@@ -32,7 +41,7 @@
   letter-spacing: 1px;
 }
 
-#air-quality-metric:hover{
+#air-quality-metric:hover {
   cursor: pointer;
 }
 
@@ -64,6 +73,11 @@
   visibility: visible;
 }
 
+.air-statistics-text:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
 .air-status {
   display: flex;
   justify-content: center;
@@ -87,11 +101,8 @@
   gap: 20px;
   text-align: center;
 }
-.air-statistics-text{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
+.air-statistics-text sub {
+  font-size: 7px;
 }
 .air-statistics span:nth-child(1) {
   color: #87ebcd;
@@ -102,4 +113,10 @@
   color: #e7e6fb;
   font-size: 12px;
   font-weight: lighter;
+}
+
+.air-statistics-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

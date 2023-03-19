@@ -7,8 +7,11 @@
 /* Define estilos para o bloco de clima */
 .weather-block {
   --weather-background: url("/images/backgrounds/bg_Ensolarado.png");
-  background: 
-    linear-gradient(to bottom, rgba(75, 7, 69, 0.5), rgba(79, 5, 97, 0.126)),
+  background: linear-gradient(
+      to bottom,
+      rgba(75, 7, 69, 0.5),
+      rgba(79, 5, 97, 0.126)
+    ),
     var(--weather-background) center no-repeat;
   background-size: cover;
   border-radius: 10px;
@@ -21,7 +24,7 @@
 }
 
 /* Estilização da imagem da temperatura */
-.temp-area #weather-img{
+.temp-area #weather-img {
   position: absolute;
   top: -3rem;
   left: -4rem;
@@ -46,26 +49,26 @@
   transition: all 0.3s ease-in-out;
 }
 
-.locale > svg:hover{
+.locale > svg:hover {
   cursor: pointer;
   transform: scale(1.3);
 }
 
-.city-input{
-  background-color:transparent;
-  border: none; 
-  color: rgb(165, 165, 165);
+.city-input {
+  background-color: transparent;
+  border: none;
+  color: rgb(255, 255, 255);
   transition: all 0.1s ease-in-out;
   text-align: end;
   width: 0;
 }
 
-.city-input:focus{
+.city-input:focus {
   outline: none;
-  border-bottom: 1px solid #dad8f7;
+  border-bottom: 1px solid #ffffff;
 }
 
-.city-input:hover{
+.city-input:hover {
   cursor: pointer;
 }
 
@@ -89,7 +92,7 @@
   color: rgb(237, 237, 237);
 }
 
-.weather-text{
+.weather-text {
   color: #dad8f7;
   font-weight: bold;
   letter-spacing: 1px;
@@ -117,14 +120,14 @@
 }
 
 .temp-min-max p:nth-of-type(2) {
-  color: rgb(157, 157, 157) !important;
+  color: rgb(233, 233, 233) !important;
 }
 /* Estilização das imagens dos blocos de estatísticas */
-.statistics-block svg{
-    width: 32px;
-    height: 32px;
-    filter: grayscale(100%)!important;
-    margin-right: 10px;
+.statistics-block svg {
+  width: 32px;
+  height: 32px;
+  filter: grayscale(100%) !important;
+  margin-right: 10px;
 }
 /* Estilização dos blocos de estatísticas */
 .statistics-block {
@@ -162,4 +165,25 @@
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
   color: white;
+}
+
+@media screen and (max-width: 670px) {
+  .temp-area #weather-img {
+    position: relative;
+    top: unset;
+    left: unset;
+  }
+  .temp-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+  }
+  .temperature{
+    margin-top: 2rem;
+  }
+  .temp-min-max{
+    margin-bottom: 2rem;
+  }
 }

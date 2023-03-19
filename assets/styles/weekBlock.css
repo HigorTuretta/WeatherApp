@@ -1,12 +1,19 @@
 /* Define estilos para o bloco de informações da semana */
 .week-block {
-  background-color: rgb(43, 168, 226);
+  background: rgba(42, 16, 75, 0.407);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(42, 16, 75, 0.407);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   grid-area: week-block;
-  background-color: #6d67d0;
-  border-radius: 10px;
-  background-color: #6d67d0;
   border-radius: 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: safe;
   font-family: "Lato", sans-serif;
@@ -17,7 +24,7 @@
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .dow-title{
@@ -33,6 +40,11 @@
 .dow-temp{
   font-size: 1rem;
   font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 }
 
 .dow-temp span:first-child{
@@ -47,6 +59,9 @@
   position: relative;
   display: inline-block;
 }
+.dow-img:hover{
+  cursor: pointer;
+}
 
 .dow-img span {
   visibility: hidden;
@@ -55,7 +70,7 @@
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 10px 10px;
+  padding: 5px 5px;
   position: absolute;
   z-index: 1;
   bottom: 150%;
@@ -79,7 +94,7 @@
 
 .dow-img:hover span {
   visibility: visible;
-  opacity: 1;
+  opacity: 1;  
 }
 
 @media screen and (max-width: 1080px) {
@@ -90,3 +105,13 @@
 }
   
 }
+
+@media screen and (max-width: 610px) {
+
+  .week-block{
+    justify-content: center;
+    gap: 15px;
+    align-items: safe;
+  }
+    
+  }

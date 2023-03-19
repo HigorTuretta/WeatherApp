@@ -80,8 +80,8 @@ const showWeatherData = async (city) => {
 
   cityTemp.innerHTML = parseInt(data.main.temp);
   weatherDescription.innerHTML = data.weather[0].description;
-  tempMin.innerHTML = `${parseInt(data.main.temp_min)}º`;
-  tempMax.innerHTML = `${parseInt(data.main.temp_max)}º`;
+  tempMin.innerHTML = `${Math.round(data.main.temp_min)}º`;
+  tempMax.innerHTML = `${Math.round(data.main.temp_max)}º`;
   updateImage(data.weather[0].icon, "weather-img");
   updateBackgroundImage(data.weather[0].icon);
   windTax.innerHTML = `${data.wind.speed}<span> km/h</span>`;
@@ -209,8 +209,8 @@ const showForecastData = async (lat, lon) => {
                         <span class="tooltip-text">${sortedForecast[day].descricao}</span>
                       </div>
                       <div class="dow-temp">
-                        <span id="day1-tempMax" >${parseInt(sortedForecast[day].tempMax)}</span>
-                        <span id="day1-tempMin">${parseInt(sortedForecast[day].tempMin)}</span>
+                        <span id="day1-tempMax" >${Math.round(sortedForecast[day].tempMax)}º</span>
+                        <span id="day1-tempMin">${Math.round(sortedForecast[day].tempMin)}º</span>
                       </div>
                     </div>`
     
