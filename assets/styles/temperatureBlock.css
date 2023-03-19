@@ -187,3 +187,32 @@
     margin-bottom: 2rem;
   }
 }
+
+@media screen and (max-width: 445px) {
+  .statistics-block svg {
+    width: 24px;
+    height: 24px;
+    filter: grayscale(100%) !important;
+    margin-right: 5px;
+  }
+  #wind-tax{
+    font-size: 0.8rem;
+  }
+  #wind-tax > span{
+    font-size: 0.6rem;
+  }
+
+  #moisture-tax{
+    font-size: 0.8rem;
+  }
+  #moisture-tax > span{
+    font-size: 0.6rem;
+  }
+  #visibility-tax{
+    font-size: 0.8rem;
+  }
+  #visibility-tax > span{
+    font-size: 0.6rem;
+  }
+  
+}
