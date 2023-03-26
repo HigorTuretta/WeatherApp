@@ -22,6 +22,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -33,6 +34,7 @@ body {
 
 /* Define estilos para o grid principal */
 .container-main {
+  margin-top: auto;
   display: grid;
   grid-template-areas:
     "weather-block air-block sun-block"
@@ -43,6 +45,39 @@ body {
 
 .hide{
   display: none;
+}
+
+footer{
+  margin-top: auto;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.footer-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.611);
+  width: 100%;
+  height: 40px;
+  box-shadow: 0px -3px 0 rgba(226, 255, 5, 0.566);
+}
+.footer-content{
+  color: white;
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 1px;
+}
+.footer-content a{
+  text-decoration: none;
+  color: rgb(169, 232, 255);
+}
+.footer-content i{
+  color: rgb(255, 240, 75);
+  font-size: 1.3rem;
 }
 
 
