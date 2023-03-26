@@ -1,6 +1,7 @@
 /* Importação da fonte Roboto do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato&family=Roboto&display=swap');
 
 /* Define o reset de margin e padding para todos os elementos */
 * {
